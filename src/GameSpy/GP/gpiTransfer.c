@@ -490,6 +490,8 @@ static GPIBool gpiHandleSendRequest
 	size_t len;
 	int totalSize = 0;
 
+	GSI_UNUSED(bufferLen);
+
 	// If we don't have a callback, we're not accepting requests.
 	/////////////////////////////////////////////////////////////
 	if(!iconnection->callbacks[GPI_TRANSFER_CALLBACK].callback)
@@ -597,8 +599,6 @@ static GPIBool gpiHandleSendRequest
 	transfer->totalSize = totalSize;
 
 	return GPITrue;
-	
-	GSI_UNUSED(bufferLen);
 }
 
 static GPIBool gpiHandleSendReply
@@ -615,6 +615,8 @@ static GPIBool gpiHandleSendReply
 	char intValue[16];
 	int version;
 	int result;
+
+	GSI_UNUSED(bufferLen);
 
 	if(!transfer->sender)
 		return GPIFalse;
@@ -664,8 +666,6 @@ static GPIBool gpiHandleSendReply
 	}
 
 	return GPITrue;
-
-	GSI_UNUSED(bufferLen);
 }
 
 static GPIBool gpiHandleBegin

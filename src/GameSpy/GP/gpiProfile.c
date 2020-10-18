@@ -129,8 +129,6 @@ gpiOpenDiskProfiles(
 	*failed = GPIFalse;
 
 	return GP_NO_ERROR;
-	
-	GSI_UNUSED(write);
 }
 
 static void
@@ -218,10 +216,6 @@ gpiReadDiskKeyValue(
 	////////
 	*failed = GPIFalse;
 	return GP_NO_ERROR;
-	
-	GSI_UNUSED(value);
-	GSI_UNUSED(key);
-	GSI_UNUSED(connection);
 }
 
 static GPResult
@@ -469,9 +463,6 @@ gpiReadVersion(
 		*version = 0;
 
 	return GP_NO_ERROR;
-	
-	GSI_UNUSED(connection);
-	GSI_UNUSED(version);
 }
 
 static void
