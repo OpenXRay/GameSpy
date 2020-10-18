@@ -1502,9 +1502,6 @@ static void ProcessStatement(char *buff, int len)
 	} else if (strncmp(buff,"\\getpidr\\",9) == 0)
 	{
 		ProcessGetPid(buff, len);
-	} else if (strncmp(buff,"\\getpidr\\",9) == 0)
-	{
-		ProcessGetPid(buff, len);
 	} else if (strncmp(buff,"\\getpdr\\",8) == 0)
 	{
 		ProcessGetData(buff, len);
