@@ -40,6 +40,7 @@
 #if defined(_MSC_VER) // DevStudio
 	// Level4, "conditional expression is constant". 
 	// Occurs with use of the MS provided macro FD_SET
+	#pragma warning ( push )
 	#pragma warning ( disable: 4127 )
 #endif // _MSC_VER
 
@@ -680,6 +681,6 @@ gsi_u32 gsiGetBroadcastIP(void)
 // Re-enable previously disabled compiler warnings
 ///////////////////////////////////////////////////
 #if defined(_MSC_VER)
-#pragma warning ( default: 4127 )
+#pragma warning ( pop )
 #endif // _MSC_VER
 
