@@ -170,14 +170,7 @@ target_sources(GameSpy-oxr PRIVATE
     webservices/AuthService.h
 )
 
-# TODO platform-specific defines
-target_compile_definitions(GameSpy-oxr
-    PRIVATE
-    _UNIX
-    _LINUX
-)
-
 set_target_properties(GameSpy-oxr PROPERTIES
-    POSITION_INDEPENDENT_CODE ON
+    POSITION_INDEPENDENT_CODE ${BUILD_SHARED_LIBS}
     UNITY_BUILD OFF
 )

@@ -34,6 +34,24 @@
 	#endif
 #endif
 
+#ifdef __linux__
+	#ifndef _LINUX
+		#define _LINUX
+	#endif
+#endif
+
+#ifdef __APPLE__
+	#ifndef _MACOSX
+		#define _MACOSX
+	#endif
+#endif
+
+#if defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__DragonFly__) || defined(BSD)
+	#ifndef _LINUX
+		#define _LINUX
+	#endif
+#endif
+
 #if defined(_LINUX) || defined(_MACOSX)
 	#ifndef _UNIX
 		#define _UNIX
