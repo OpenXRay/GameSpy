@@ -13,7 +13,7 @@
 	#include "win32/gsThreadWin32.c"
 #elif defined(_MACOSX)
 	#include "macosx/gsThreadMacOSX.c"
-#elif defined (_LINUX)
+#elif defined(_LINUX) || defined(_HAIKU)
 	#include "linux/gsThreadLinux.c"
 #elif defined(_NITRO)
 	#include "nitro/gsThreadNitro.c"

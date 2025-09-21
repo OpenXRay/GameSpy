@@ -10,7 +10,7 @@
 	//#include "xbox/gsUtilXBox.c"
 #elif defined(_WIN32)
 	#include "win32/gsUtilWin32.c"
-#elif defined(_LINUX)
+#elif defined(_LINUX) || defined(_HAIKU)
 	#include "linux/gsUtilLinux.c"
 #elif defined(_MACOSX)
 	#include "macosx/gsUtilMacOSX.c"

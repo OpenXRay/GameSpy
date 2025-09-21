@@ -52,7 +52,13 @@
 	#endif
 #endif
 
-#if defined(_LINUX) || defined(_MACOSX)
+#ifdef __HAIKU__
+	#ifndef _HAIKU
+		#define _HAIKU
+	#endif
+#endif
+
+#if defined(_LINUX) || defined(_MACOSX) || defined(_HAIKU)
 	#ifndef _UNIX
 		#define _UNIX
 	#endif
