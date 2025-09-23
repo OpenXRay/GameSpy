@@ -174,3 +174,7 @@ set_target_properties(GameSpy-oxr PROPERTIES
     POSITION_INDEPENDENT_CODE ${BUILD_SHARED_LIBS}
     UNITY_BUILD OFF
 )
+
+if (WIN32)
+    target_link_libraries(GameSpy-oxr PRIVATE Ws2_32)
+endif()
