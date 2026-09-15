@@ -49,6 +49,14 @@ void gsiCancelThread(GSIThreadID id)
 	//should i destroy the attributes here?
 	pthread_attr_destroy(&id.attr);
 
+#if defined(__ANDROID__)
+	// Bionic does not provide pthread_cancel(). Wait for the resolver worker
+	// before its caller releases the worker's argument storage.
+	if (pthread_join(id.thread, NULL) != PTHREAD_NO_ERROR) {
+		gsDebugFormat(GSIDebugCat_Common, GSIDebugType_Misc, GSIDebugLevel_WarmError,
+			"Failed to join thread\r\n");
+	}
+#else
 	if (pthread_cancel(id.thread) != PTHREAD_NO_ERROR) {
 		//there was an error - how should we handle these? or should we?
 		gsDebugFormat(GSIDebugCat_Common, GSIDebugType_Misc, GSIDebugLevel_WarmError,
@@ -57,13 +65,18 @@ void gsiCancelThread(GSIThreadID id)
 	//free up memory and set to NULL
 
 	gsifree(&id.thread);
+#endif
 }
 
 // This must be called from INSIDE the thread you wish to exit
 void gsiExitThread(GSIThreadID id)
 {
 	// detach the thread so that it knows to free resources upon exit
+#if !defined(__ANDROID__)
 	pthread_detach(id.thread);
+#else
+	GSI_UNUSED(id);
+#endif
 	
 	// exit thread to free up resources
 	pthread_exit(NULL);
@@ -71,6 +84,14 @@ void gsiExitThread(GSIThreadID id)
 
 void gsiCleanupThread(GSIThreadID id)
 {
+#if defined(__ANDROID__)
+	// Android workers stay joinable so both normal completion and cancellation
+	// reclaim their pthread resources before caller-owned storage is released.
+	if (pthread_join(id.thread, NULL) != PTHREAD_NO_ERROR) {
+		gsDebugFormat(GSIDebugCat_Common, GSIDebugType_Misc, GSIDebugLevel_WarmError,
+			"Failed to join thread\r\n");
+	}
+#endif
 	// destroy any leftover attributes associated with the thread
 	pthread_attr_destroy(&id.attr);
 }
